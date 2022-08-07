@@ -1,14 +1,28 @@
 import React, {PropsWithChildren} from 'react';
-import {Image, ImageStyle, View, ViewStyle} from 'react-native';
+import {
+  Image,
+  ImageStyle,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {colors} from '../../../themes';
 
 const logo = require('../../../assets/logo.png');
 
 const Wrapper: ViewStyle = {
   flex: 1,
+};
+
+const Container: ViewStyle = {
+  flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: colors.background,
+  width: '100%',
 };
 
 const InstaLogo: ImageStyle = {
@@ -16,13 +30,24 @@ const InstaLogo: ImageStyle = {
   height: 200,
 };
 
-const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
+export const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
+  const hanleClickDismissKeyboard = () => {
+    Keyboard.dismiss();
+  };
+
   return (
-    <View style={Wrapper}>
-      <Image resizeMode="contain" source={logo} style={InstaLogo} />
-      {children}
-    </View>
+    <TouchableWithoutFeedback
+      style={Wrapper}
+      onPress={hanleClickDismissKeyboard}>
+      <KeyboardAvoidingView
+        style={Container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}>
+        <View style={Container}>
+          <Image resizeMode="contain" source={logo} style={InstaLogo} />
+          {children}
+        </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
-
-export default AuthLayout;

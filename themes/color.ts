@@ -9,10 +9,12 @@ const palette = {
   angry: '#dd3333',
   deepPurple: '#5D2555',
   blue: '#0095F6',
+  gray: 'rgba(255, 255, 255, 0.15)',
 };
 
 export const colors = {
   background: palette.black,
   text: palette.white,
   primary: palette.blue,
+  gray: palette.gray,
 };

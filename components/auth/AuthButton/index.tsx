@@ -17,7 +17,11 @@ const ButtonText: TextStyle = {
   textAlign: 'center',
 };
 
-const AuthButton: React.FC<IAuthButtonProps> = ({disabled, text, onPress}) => {
+export const AuthButton: React.FC<IAuthButtonProps> = ({
+  disabled,
+  text,
+  onPress,
+}) => {
   return (
     <TouchableOpacity
       style={ButtonContainer}
@@ -27,5 +31,3 @@ const AuthButton: React.FC<IAuthButtonProps> = ({disabled, text, onPress}) => {
     </TouchableOpacity>
   );
 };
-
-export default AuthButton;
