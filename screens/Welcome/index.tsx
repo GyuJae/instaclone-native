@@ -9,7 +9,7 @@ const CreateAccountContainer: ViewStyle = {
   display: 'flex',
   backgroundColor: colors.primary,
   padding: spacing.medium,
-  borderRadius: 5,
+  borderRadius: 3,
 };
 
 const CreateAccountText: TextStyle = {
