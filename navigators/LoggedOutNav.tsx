@@ -17,7 +17,13 @@ export const LoggedOutNav = () => {
       screenOptions={{
         headerBackTitleVisible: false,
       }}>
-      <Stack.Screen name="welcome" component={Welcome} />
+      <Stack.Screen
+        name="welcome"
+        options={{
+          headerShown: false,
+        }}
+        component={Welcome}
+      />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="createAccount" component={CreateAccount} />
     </Stack.Navigator>
