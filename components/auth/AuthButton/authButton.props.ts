@@ -4,4 +4,5 @@ export interface IAuthButtonProps extends TouchableOpacityProps {
   disabled: boolean;
   onPress: () => void;
   text: string;
+  loading: boolean;
 }

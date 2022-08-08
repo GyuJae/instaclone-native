@@ -111,6 +111,7 @@ export const Login: React.FC<
           disabled={!isValid}
           text="Log In"
           onPress={handleSubmit(onSubmit)}
+          loading
         />
       </View>
     </AuthLayout>

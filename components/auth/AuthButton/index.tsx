@@ -1,5 +1,11 @@
 import React from 'react';
-import {Text, TextStyle, TouchableOpacity, ViewStyle} from 'react-native';
+import {
+  ActivityIndicator,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 import {colors, spacing} from '../../../themes';
 import {IAuthButtonProps} from './authButton.props';
 
@@ -31,6 +37,7 @@ export const AuthButton: React.FC<IAuthButtonProps> = ({
   disabled,
   text,
   onPress,
+  loading,
 }) => {
   const buttonContainerStyle = disabled
     ? ButtonIsDisabledContainer
@@ -40,7 +47,9 @@ export const AuthButton: React.FC<IAuthButtonProps> = ({
       style={buttonContainerStyle}
       disabled={disabled}
       onPress={onPress}>
-      <Text style={ButtonText}>{text}</Text>
+      <Text style={ButtonText}>
+        {loading ? <ActivityIndicator color="white" size="small" /> : text}
+      </Text>
     </TouchableOpacity>
   );
 };

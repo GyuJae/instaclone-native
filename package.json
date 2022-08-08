@@ -10,9 +10,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@react-native-masked-view/masked-view": "^0.2.7",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/stack": "^6.2.2",
+    "graphql": "^16.5.0",
     "react": "18.0.0",
     "react-hook-form": "^7.34.0",
     "react-native": "0.69.3",

@@ -5,6 +5,7 @@ import {ILoggedOutNavigatorParamList} from '../../navigators';
 import {colors, spacing} from '../../themes';
 import {AuthButton, AuthLayout, FormError, InputStyle} from '../../components';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
+import {useCreateAccount} from '../../apollo';
 
 const Wrapper: ViewStyle = {
   flex: 1,
@@ -34,12 +35,19 @@ export const CreateAccount: React.FC<
   const usernameRef = React.createRef<TextInput>();
   const passwordRef = React.createRef<TextInput>();
 
+  const {createAccountMutate, loading} = useCreateAccount();
+
   const onNext = (nextRef: React.RefObject<TextInput>) => {
     nextRef.current?.focus();
   };
 
   const onSubmit: SubmitHandler<IForm> = input => {
-    console.log(input);
+    if (loading) return;
+    createAccountMutate({
+      variables: {
+        input,
+      },
+    });
   };
 
   return (
@@ -145,6 +153,7 @@ export const CreateAccount: React.FC<
           disabled={!isValid}
           text="Create Account"
           onPress={handleSubmit(onSubmit)}
+          loading={loading}
         />
       </View>
     </AuthLayout>
