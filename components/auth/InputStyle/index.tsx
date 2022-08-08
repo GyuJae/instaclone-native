@@ -6,4 +6,5 @@ export const InputStyle: TextStyle = {
   backgroundColor: colors.gray,
   borderRadius: 3,
   marginBottom: spacing.tiny,
+  color: colors.text,
 };

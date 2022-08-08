@@ -38,7 +38,8 @@ export const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
   return (
     <TouchableWithoutFeedback
       style={Wrapper}
-      onPress={hanleClickDismissKeyboard}>
+      onPress={hanleClickDismissKeyboard}
+      disabled={Platform.OS === 'web'}>
       <KeyboardAvoidingView
         style={Container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

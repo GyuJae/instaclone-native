@@ -11,6 +11,16 @@ const ButtonContainer: ViewStyle = {
   width: '100%',
 };
 
+const ButtonIsValidContainer: ViewStyle = {
+  ...ButtonContainer,
+  opacity: 1,
+};
+
+const ButtonIsDisabledContainer: ViewStyle = {
+  ...ButtonContainer,
+  opacity: 0.6,
+};
+
 const ButtonText: TextStyle = {
   color: colors.text,
   fontWeight: '600',
@@ -22,9 +32,12 @@ export const AuthButton: React.FC<IAuthButtonProps> = ({
   text,
   onPress,
 }) => {
+  const buttonContainerStyle = disabled
+    ? ButtonIsDisabledContainer
+    : ButtonIsValidContainer;
   return (
     <TouchableOpacity
-      style={ButtonContainer}
+      style={buttonContainerStyle}
       disabled={disabled}
       onPress={onPress}>
       <Text style={ButtonText}>{text}</Text>
