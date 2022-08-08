@@ -3,7 +3,7 @@ import {Text, TextStyle, View, ViewStyle} from 'react-native';
 import {colors, spacing} from '../../../themes';
 
 interface IProps {
-  text: string;
+  text: string | null;
   inView: boolean;
 }
 

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {ILoggedOutNavigatorParamList} from '../../navigators';
 import {TextInput, View, ViewStyle} from 'react-native';
 import {AuthButton, AuthLayout, FormError, InputStyle} from '../../components';
 import {spacing} from '../../themes';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
+import {useLogin} from '../../apollo';
 
 const Wrapper: ViewStyle = {
   flex: 1,
@@ -29,14 +30,25 @@ export const Login: React.FC<
     mode: 'onChange',
   });
 
+  const [formError, setFormError] = useState<string | null>(null);
   const emailRef = React.createRef<TextInput>();
   const passwordRef = React.createRef<TextInput>();
+
+  const {loginMutate, loading} = useLogin();
 
   const onNext = (nextRef: React.RefObject<TextInput>) => {
     nextRef.current?.focus();
   };
   const onSubmit: SubmitHandler<IForm> = input => {
-    console.log(input);
+    loginMutate({
+      variables: {
+        input,
+      },
+      onCompleted: ({login: {ok, error, token}}) => {
+        if (!ok && error) setFormError(error);
+        if (ok && token) console.log(ok, error, token);
+      },
+    });
   };
 
   return (
@@ -111,8 +123,9 @@ export const Login: React.FC<
           disabled={!isValid}
           text="Log In"
           onPress={handleSubmit(onSubmit)}
-          loading
+          loading={loading}
         />
+        <FormError inView={!!formError} text={formError} />
       </View>
     </AuthLayout>
   );

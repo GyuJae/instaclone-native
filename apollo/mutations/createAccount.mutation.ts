@@ -4,14 +4,7 @@ export const useCreateAccount = () => {
   const [createAccountMutate, {loading}] = useMutation<
     ICreateAccountMutation,
     ICreateAccountVariables
-  >(CREATE_ACCOUNT_MUTAION, {
-    onCompleted: ({createAccount: {ok, error}}) => {
-      console.log(ok, error);
-    },
-    onError: error => {
-      console.log(error);
-    },
-  });
+  >(CREATE_ACCOUNT_MUTAION);
 
   return {
     createAccountMutate,

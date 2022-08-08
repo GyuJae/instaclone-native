@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {TextInput, View, ViewStyle} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {ILoggedOutNavigatorParamList} from '../../navigators';
@@ -22,7 +22,7 @@ interface IForm {
 
 export const CreateAccount: React.FC<
   StackScreenProps<ILoggedOutNavigatorParamList, 'createAccount'>
-> = () => {
+> = ({navigation}) => {
   const {
     control,
     handleSubmit,
@@ -31,6 +31,7 @@ export const CreateAccount: React.FC<
     mode: 'onChange',
   });
 
+  const [formError, setFormError] = useState<string | null>(null);
   const emailRef = React.createRef<TextInput>();
   const usernameRef = React.createRef<TextInput>();
   const passwordRef = React.createRef<TextInput>();
@@ -46,6 +47,10 @@ export const CreateAccount: React.FC<
     createAccountMutate({
       variables: {
         input,
+      },
+      onCompleted: ({createAccount: {ok, error}}) => {
+        if (!ok && error) setFormError(error);
+        if (ok) navigation.navigate('login');
       },
     });
   };
@@ -155,6 +160,7 @@ export const CreateAccount: React.FC<
           onPress={handleSubmit(onSubmit)}
           loading={loading}
         />
+        <FormError inView={!!formError} text={formError} />
       </View>
     </AuthLayout>
   );

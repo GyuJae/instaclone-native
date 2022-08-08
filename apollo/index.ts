@@ -8,3 +8,4 @@ export const apolloClient = new ApolloClient({
 });
 
 export * from './mutations/createAccount.mutation';
+export * from './mutations/login.mutation';
