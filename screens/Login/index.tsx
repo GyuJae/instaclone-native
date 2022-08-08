@@ -5,7 +5,7 @@ import {TextInput, View, ViewStyle} from 'react-native';
 import {AuthButton, AuthLayout, FormError, InputStyle} from '../../components';
 import {spacing} from '../../themes';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
-import {useLogin} from '../../apollo';
+import {logInUser, useLogin} from '../../apollo';
 
 const Wrapper: ViewStyle = {
   flex: 1,
@@ -40,13 +40,14 @@ export const Login: React.FC<
     nextRef.current?.focus();
   };
   const onSubmit: SubmitHandler<IForm> = input => {
+    if (loading) return;
     loginMutate({
       variables: {
         input,
       },
       onCompleted: ({login: {ok, error, token}}) => {
         if (!ok && error) setFormError(error);
-        if (ok && token) console.log(ok, error, token);
+        if (ok && token) logInUser(token);
       },
     });
   };
