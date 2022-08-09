@@ -11,7 +11,7 @@ export const logInUser = async (token: string) => {
 };
 
 export const apolloClient = new ApolloClient({
-  uri: 'https://lazy-pumas-wink-119-69-166-205.loca.lt/graphql',
+  uri: 'https://chilly-spies-bathe-119-69-166-205.loca.lt/graphql',
   cache: new InMemoryCache(),
 });
 
