@@ -23,7 +23,7 @@ export const logOutUser = async () => {
 };
 
 const httpLink = createHttpLink({
-  uri: 'https://long-forks-post-119-69-166-205.loca.lt/graphql',
+  uri: 'https://thick-numbers-nail-119-69-166-205.loca.lt/graphql',
 });
 
 const authLink = setContext((_, {headers}) => {
