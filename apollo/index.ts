@@ -28,8 +28,10 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, {headers}) => {
   return {
-    ...headers,
-    'x-jwt': tokenVar(),
+    headers: {
+      ...headers,
+      'x-jwt': tokenVar(),
+    },
   };
 });
 

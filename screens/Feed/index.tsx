@@ -3,6 +3,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
 import {colors} from '../../themes';
 import {useSeeFeed} from '../../apollo/queries/seeFeed.query';
+import ScreenLayout from '../../components/ScreenLayout';
 
 type FeedScreenProps = NativeStackScreenProps<any, 'feed'>;
 
@@ -19,15 +20,16 @@ const Title: TextStyle = {
 
 export const Feed = ({navigation}: FeedScreenProps) => {
   const {data, loading} = useSeeFeed(null);
-  console.log(data, loading);
   const handleClickNavigatePhoto = () =>
     navigation.navigate('stack', {screen: 'photo', params: {photoId: 1}});
 
   return (
-    <View style={Wrapper}>
-      <TouchableOpacity onPress={handleClickNavigatePhoto}>
-        <Text style={Title}>Photo</Text>
-      </TouchableOpacity>
-    </View>
+    <ScreenLayout loading={loading}>
+      <View style={Wrapper}>
+        <TouchableOpacity onPress={handleClickNavigatePhoto}>
+          <Text style={Title}>Photo</Text>
+        </TouchableOpacity>
+      </View>
+    </ScreenLayout>
   );
 };
