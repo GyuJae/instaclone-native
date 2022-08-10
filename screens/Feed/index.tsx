@@ -18,7 +18,7 @@ const Title: TextStyle = {
 
 export const Feed = ({navigation}: FeedScreenProps) => {
   const handleClickNavigatePhoto = () =>
-    navigation.navigate('stack', {screen: 'photo'});
+    navigation.navigate('stack', {screen: 'photo', params: {photoId: 1}});
 
   return (
     <View style={Wrapper}>

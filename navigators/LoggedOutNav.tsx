@@ -1,7 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {CreateAccount, Login, Welcome} from '../screens';
-import {colors} from '../themes';
 
 export type ILoggedOutNavigatorParamList = {
   welcome: undefined;

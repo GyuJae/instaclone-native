@@ -15,6 +15,7 @@ export const StackNav = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerMode: 'screen',
         headerBackTitleVisible: false,
         headerTintColor: colors.text,
         headerStyle: {

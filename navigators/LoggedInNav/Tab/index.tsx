@@ -3,7 +3,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Feed, Me, Notifications, Profile, Search} from '../../../screens';
 import {colors} from '../../../themes';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {View} from 'react-native';
+import {Image, ImageStyle, View} from 'react-native';
+
+const logo = require('../../../assets/logo.png');
 
 export type ITabNavigatorParamList = {
   feed: undefined;
@@ -15,17 +17,25 @@ export type ITabNavigatorParamList = {
 
 const Tab = createBottomTabNavigator<ITabNavigatorParamList>();
 
+const InstaLogo: ImageStyle = {
+  height: 40,
+  width: 120,
+};
+
 export const TabNav = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopColor: colors.gray,
         },
         tabBarShowLabel: false,
         tabBarActiveTintColor: colors.text,
+        headerStyle: {
+          backgroundColor: colors.background,
+        },
+        headerTitleAlign: 'center',
       }}>
       <Tab.Screen
         name="feed"
@@ -37,6 +47,9 @@ export const TabNav = () => {
               color={color}
               size={22}
             />
+          ),
+          headerTitle: () => (
+            <Image resizeMode="contain" source={logo} style={InstaLogo} />
           ),
         }}
       />
