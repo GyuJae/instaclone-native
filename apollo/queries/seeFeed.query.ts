@@ -44,36 +44,38 @@ export const SEE_FEED_QUERY = gql`
   ${USER_FEED_FRAGMENT}
 `;
 
+export interface ISeeFeedPost {
+  id: number;
+  caption: string;
+  isLiked: boolean;
+  likeCount: number;
+  commentCount: number;
+  files: {
+    id: number;
+    posterPath: string;
+  }[];
+  user: {
+    username: string;
+    avatar: string | null;
+    isMe: boolean;
+  };
+  comments: {
+    id: number;
+    payload: string;
+    createdAt: string;
+    isMine: boolean;
+    user: {
+      username: string;
+      isMe: boolean;
+      avatar: string | null;
+    };
+  }[];
+}
+
 export interface ISeeFeedOutput {
   ok: boolean;
   error: string | null;
-  posts: {
-    id: number;
-    caption: string;
-    isLiked: boolean;
-    likeCount: number;
-    commentCount: number;
-    files: {
-      id: number;
-      posterPath: string;
-    }[];
-    user: {
-      username: string;
-      avatar: string | null;
-      isMe: boolean;
-    };
-    comments: {
-      id: number;
-      payload: string;
-      createdAt: string;
-      isMine: boolean;
-      user: {
-        username: string;
-        isMe: boolean;
-        avatar: string | null;
-      };
-    }[];
-  }[];
+  posts: ISeeFeedPost[];
 }
 
 export interface ISeeFeed {

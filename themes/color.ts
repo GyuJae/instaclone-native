@@ -18,4 +18,5 @@ export const colors = {
   primary: palette.blue,
   gray: palette.gray,
   warn: palette.angry,
+  lightGray: palette.lightGrey,
 };
