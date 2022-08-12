@@ -23,7 +23,7 @@ export const logOutUser = async () => {
 };
 
 const httpLink = createHttpLink({
-  uri: 'https://quiet-hairs-think-119-69-166-205.loca.lt/graphql',
+  uri: 'https://yummy-berries-shave-119-69-166-205.loca.lt/graphql',
 });
 
 const authLink = setContext((_, {headers}) => {

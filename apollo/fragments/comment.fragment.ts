@@ -7,6 +7,7 @@ export const COMMENT_FEED_FRAMENT = gql`
     createdAt
     isMine
     user {
+      id
       username
       isMe
       avatar

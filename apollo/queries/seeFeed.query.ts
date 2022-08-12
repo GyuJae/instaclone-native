@@ -6,7 +6,7 @@ import {
 } from '../fragments';
 
 export const useSeeFeed = (lastId: number | null) => {
-  const {data, loading} = useQuery<ISeeFeed, ISeeFeedVariables>(
+  const {data, loading, refetch} = useQuery<ISeeFeed, ISeeFeedVariables>(
     SEE_FEED_QUERY,
     {
       variables: {
@@ -20,6 +20,7 @@ export const useSeeFeed = (lastId: number | null) => {
   return {
     data,
     loading,
+    refetch,
   };
 };
 
@@ -55,6 +56,7 @@ export interface ISeeFeedPost {
     posterPath: string;
   }[];
   user: {
+    id: number;
     username: string;
     avatar: string | null;
     isMe: boolean;
@@ -65,6 +67,7 @@ export interface ISeeFeedPost {
     createdAt: string;
     isMine: boolean;
     user: {
+      id: number;
       username: string;
       isMe: boolean;
       avatar: string | null;

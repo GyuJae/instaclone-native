@@ -10,10 +10,16 @@ type FeedScreenProps = NativeStackScreenProps<any, 'feed'>;
 export const Feed = ({navigation}: FeedScreenProps) => {
   const {data, loading} = useSeeFeed(null);
   const handleClickNavigatePhoto = () =>
-    navigation.navigate('stack', {screen: 'photo', params: {photoId: 1}});
+    navigation.navigate('stack', {screen: 'photo', params: {postId: 1}});
 
   const handleClickNavigationProfile = () =>
     navigation.navigate('stack', {screen: 'profile', params: {userId: 1}});
+
+  const handleClickNavigationLikes = () =>
+    navigation.navigate('stack', {screen: 'likes', params: {postId: 1}});
+
+  const handleClickNavigationComments = () =>
+    navigation.navigate('stack', {screen: 'comments', params: {postId: 1}});
 
   return (
     <ScreenLayout loading={loading}>
@@ -25,6 +31,8 @@ export const Feed = ({navigation}: FeedScreenProps) => {
             post={post.item}
             handleClickNavigationProfile={handleClickNavigationProfile}
             handleClickNavigatePhoto={handleClickNavigatePhoto}
+            handleClickNavigationLikes={handleClickNavigationLikes}
+            handleClickNavigationComments={handleClickNavigationComments}
           />
         )}
       />

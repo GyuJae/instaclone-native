@@ -6,3 +6,5 @@ export * from './Search';
 export * from './Notifications';
 export * from './Profile';
 export * from './Me';
+export * from './Likes';
+export * from './Comments';
