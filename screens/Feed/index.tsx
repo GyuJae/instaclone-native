@@ -8,13 +8,25 @@ import {PostItem} from '../../components';
 type FeedScreenProps = NativeStackScreenProps<any, 'feed'>;
 
 export const Feed = ({navigation}: FeedScreenProps) => {
-  const {data, loading, refetch} = useSeeFeed(null);
+  const {data, loading, refetch, fetchMore} = useSeeFeed(0);
   const [refreshing, setRefreshing] = useState<boolean>(false);
-
   const handleRefresh = async () => {
     setRefreshing(true);
     await refetch();
     setRefreshing(false);
+  };
+
+  const handleEndReachedFetchMore = () => {
+    if (loading || !data?.seeFeed.hasNextPage) {
+      return;
+    }
+    fetchMore({
+      variables: {
+        input: {
+          offset: data?.seeFeed.posts.length,
+        },
+      },
+    });
   };
 
   const handleClickNavigatePhoto = () =>
@@ -32,6 +44,8 @@ export const Feed = ({navigation}: FeedScreenProps) => {
   return (
     <ScreenLayout loading={loading}>
       <FlatList
+        onEndReachedThreshold={0.05}
+        onEndReached={handleEndReachedFetchMore}
         refreshing={refreshing}
         onRefresh={handleRefresh}
         data={data?.seeFeed.posts}

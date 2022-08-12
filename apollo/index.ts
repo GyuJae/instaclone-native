@@ -23,7 +23,7 @@ export const logOutUser = async () => {
 };
 
 const httpLink = createHttpLink({
-  uri: 'https://yummy-berries-shave-119-69-166-205.loca.lt/graphql',
+  uri: 'https://four-icons-tan-119-69-166-205.loca.lt/graphql',
 });
 
 const authLink = setContext((_, {headers}) => {
@@ -37,7 +37,31 @@ const authLink = setContext((_, {headers}) => {
 
 export const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          seeFeed: {
+            keyArgs: false,
+            merge(
+              existing = {
+                posts: [],
+              },
+              incoming = {
+                posts: [],
+              },
+            ) {
+              return {
+                ...existing,
+                ...incoming,
+                posts: [...existing.posts, ...incoming.posts],
+              };
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 
 export * from './mutations/createAccount.mutation';

@@ -5,22 +5,24 @@ import {
   USER_FEED_FRAGMENT,
 } from '../fragments';
 
-export const useSeeFeed = (lastId: number | null) => {
-  const {data, loading, refetch} = useQuery<ISeeFeed, ISeeFeedVariables>(
-    SEE_FEED_QUERY,
-    {
-      variables: {
-        input: {
-          lastId,
-        },
+export const useSeeFeed = (offset: number | null) => {
+  const {data, loading, refetch, fetchMore, error} = useQuery<
+    ISeeFeed,
+    ISeeFeedVariables
+  >(SEE_FEED_QUERY, {
+    variables: {
+      input: {
+        offset,
       },
     },
-  );
+  });
 
   return {
     data,
     loading,
     refetch,
+    fetchMore,
+    error,
   };
 };
 
@@ -29,6 +31,7 @@ export const SEE_FEED_QUERY = gql`
     seeFeed(input: $input) {
       ok
       error
+      hasNextPage
       posts {
         ...PostFeedFragment
         user {
@@ -78,6 +81,7 @@ export interface ISeeFeedPost {
 export interface ISeeFeedOutput {
   ok: boolean;
   error: string | null;
+  hasNextPage: boolean;
   posts: ISeeFeedPost[];
 }
 
@@ -86,7 +90,7 @@ export interface ISeeFeed {
 }
 
 export interface ISeeFeedInput {
-  lastId: number | null;
+  offset: number | null;
 }
 
 export interface ISeeFeedVariables {
