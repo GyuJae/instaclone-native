@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {FlatList} from 'react-native';
 import {useSeeFeed} from '../../apollo/queries/seeFeed.query';
@@ -8,7 +8,15 @@ import {PostItem} from '../../components';
 type FeedScreenProps = NativeStackScreenProps<any, 'feed'>;
 
 export const Feed = ({navigation}: FeedScreenProps) => {
-  const {data, loading} = useSeeFeed(null);
+  const {data, loading, refetch} = useSeeFeed(null);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
+
   const handleClickNavigatePhoto = () =>
     navigation.navigate('stack', {screen: 'photo', params: {postId: 1}});
 
@@ -24,6 +32,8 @@ export const Feed = ({navigation}: FeedScreenProps) => {
   return (
     <ScreenLayout loading={loading}>
       <FlatList
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
         data={data?.seeFeed.posts}
         keyExtractor={post => `feed-${post.id}`}
         renderItem={post => (
