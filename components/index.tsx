@@ -6,3 +6,4 @@ export * from './ScreenLayout';
 export * from './PostItem';
 export * from './UserAvatar';
 export * from './UserRow';
+export * from './DismissKeyboard';

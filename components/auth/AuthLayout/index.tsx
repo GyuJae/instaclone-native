@@ -2,20 +2,15 @@ import React, {PropsWithChildren} from 'react';
 import {
   Image,
   ImageStyle,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
 import {colors} from '../../../themes';
+import {DismissKeyboard} from '../../DismissKeyboard';
 
 const logo = require('../../../assets/logo.png');
-
-const Wrapper: ViewStyle = {
-  flex: 1,
-};
 
 const Container: ViewStyle = {
   flex: 1,
@@ -31,15 +26,8 @@ const InstaLogo: ImageStyle = {
 };
 
 export const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
-  const hanleClickDismissKeyboard = () => {
-    Keyboard.dismiss();
-  };
-
   return (
-    <TouchableWithoutFeedback
-      style={Wrapper}
-      onPress={hanleClickDismissKeyboard}
-      disabled={Platform.OS === 'web'}>
+    <DismissKeyboard>
       <KeyboardAvoidingView
         style={Container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -49,6 +37,6 @@ export const AuthLayout: React.FC<PropsWithChildren> = ({children}) => {
           {children}
         </View>
       </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+    </DismissKeyboard>
   );
 };

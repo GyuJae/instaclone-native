@@ -1,8 +1,8 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {TextInput, View, ViewStyle} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {ILoggedOutNavigatorParamList} from '../../navigators';
-import {colors, spacing} from '../../themes';
+import {spacing} from '../../themes';
 import {AuthButton, AuthLayout, FormError, InputStyle} from '../../components';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {useCreateAccount} from '../../apollo';
@@ -43,14 +43,20 @@ export const CreateAccount: React.FC<
   };
 
   const onSubmit: SubmitHandler<IForm> = input => {
-    if (loading) return;
+    if (loading) {
+      return;
+    }
     createAccountMutate({
       variables: {
         input,
       },
       onCompleted: ({createAccount: {ok, error}}) => {
-        if (!ok && error) setFormError(error);
-        if (ok) navigation.navigate('login');
+        if (!ok && error) {
+          setFormError(error);
+        }
+        if (ok) {
+          navigation.navigate('login');
+        }
       },
     });
   };
