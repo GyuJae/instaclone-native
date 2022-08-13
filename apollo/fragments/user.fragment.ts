@@ -8,3 +8,13 @@ export const USER_FEED_FRAGMENT = gql`
     isMe
   }
 `;
+
+export const USER_FRAGEMENT = gql`
+  fragment UserFragment on UserEntity {
+    id
+    username
+    avatar
+    isFollowing
+    isMe
+  }
+`;

@@ -6,9 +6,9 @@ import {colors} from '../../../themes';
 
 export type IStackNavigatorParamList = {
   profile: {useId: string};
-  photo: {postId: string};
-  likes: {postId: string};
-  comments: {postId: string};
+  photo: undefined;
+  likes: {postId: number};
+  comments: undefined;
 };
 
 const Stack = createStackNavigator<IStackNavigatorParamList>();

@@ -1,22 +1,50 @@
-import React from 'react';
-import {Text, TextStyle, View, ViewStyle} from 'react-native';
-import {colors} from '../../themes';
+import {StackScreenProps} from '@react-navigation/stack';
+import React, {useState} from 'react';
+import {FlatList} from 'react-native';
+import {useSeePostLikes} from '../../apollo';
+import {UserRow} from '../../components';
+import ScreenLayout from '../../components/ScreenLayout';
+import {IStackNavigatorParamList} from '../../navigators/LoggedInNav/Stack';
 
-const Wrapper: ViewStyle = {
-  flex: 1,
-  backgroundColor: colors.background,
-  justifyContent: 'center',
-  alignItems: 'center',
-};
+export const Likes: React.FC<
+  StackScreenProps<IStackNavigatorParamList, 'likes'>
+> = ({
+  route: {
+    params: {postId},
+  },
+}) => {
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+  const {data, loading, refetch, fetchMore} = useSeePostLikes(postId, 0);
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
 
-const Title: TextStyle = {
-  color: colors.text,
-};
+  const handleEndReachedFetchMore = () => {
+    if (loading || !data || !data.seePostLikes.hasNextPage) {
+      return;
+    }
+    fetchMore({
+      variables: {
+        input: {
+          offset: data.seePostLikes.users.length,
+        },
+      },
+    });
+  };
 
-export const Likes = () => {
   return (
-    <View style={Wrapper}>
-      <Text style={Title}>Likes</Text>
-    </View>
+    <ScreenLayout loading={loading}>
+      <FlatList
+        onEndReachedThreshold={0.05}
+        onEndReached={handleEndReachedFetchMore}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        data={data?.seePostLikes.users}
+        keyExtractor={(item, index) => `Like-User-${item.id}-${index}`}
+        renderItem={({item: user}) => <UserRow user={user} />}
+      />
+    </ScreenLayout>
   );
 };

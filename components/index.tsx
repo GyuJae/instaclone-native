@@ -5,3 +5,4 @@ export * from './auth/FormError';
 export * from './ScreenLayout';
 export * from './PostItem';
 export * from './UserAvatar';
+export * from './UserRow';

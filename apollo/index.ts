@@ -23,7 +23,7 @@ export const logOutUser = async () => {
 };
 
 const httpLink = createHttpLink({
-  uri: 'https://slow-coats-kneel-119-69-166-205.loca.lt/graphql',
+  uri: 'https://some-groups-refuse-119-69-166-205.loca.lt/graphql',
 });
 
 const authLink = setContext((_, {headers}) => {
@@ -56,6 +56,23 @@ export const cache = new InMemoryCache({
             };
           },
         },
+        seePostLikes: {
+          keyArgs: false,
+          merge(
+            existing = {
+              users: [],
+            },
+            incoming = {
+              users: [],
+            },
+          ) {
+            return {
+              ...existing,
+              ...incoming,
+              users: [...existing.users, ...incoming.users],
+            };
+          },
+        },
       },
     },
   },
@@ -68,3 +85,6 @@ export const apolloClient = new ApolloClient({
 
 export * from './mutations/createAccount.mutation';
 export * from './mutations/login.mutation';
+export * from './mutations/toggleFollow.mutation';
+export * from './mutations/toggleLike.mutation';
+export * from './queries/seePostLikes.query';

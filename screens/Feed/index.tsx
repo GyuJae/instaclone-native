@@ -23,23 +23,23 @@ export const Feed = ({navigation}: FeedScreenProps) => {
     fetchMore({
       variables: {
         input: {
-          offset: data?.seeFeed.posts.length,
+          offset: data.seeFeed.posts.length,
         },
       },
     });
   };
 
   const handleClickNavigatePhoto = () =>
-    navigation.navigate('stack', {screen: 'photo', params: {postId: 1}});
+    navigation.navigate('stack', {screen: 'photo'});
 
   const handleClickNavigationProfile = () =>
     navigation.navigate('stack', {screen: 'profile', params: {userId: 1}});
 
-  const handleClickNavigationLikes = () =>
-    navigation.navigate('stack', {screen: 'likes', params: {postId: 1}});
+  const handleClickNavigationLikes = (postId: number) =>
+    navigation.navigate('stack', {screen: 'likes', params: {postId}});
 
   const handleClickNavigationComments = () =>
-    navigation.navigate('stack', {screen: 'comments', params: {postId: 1}});
+    navigation.navigate('stack', {screen: 'comments'});
 
   return (
     <ScreenLayout loading={loading}>
@@ -55,7 +55,9 @@ export const Feed = ({navigation}: FeedScreenProps) => {
             post={post.item}
             handleClickNavigationProfile={handleClickNavigationProfile}
             handleClickNavigatePhoto={handleClickNavigatePhoto}
-            handleClickNavigationLikes={handleClickNavigationLikes}
+            handleClickNavigationLikes={() =>
+              handleClickNavigationLikes(post.item.id)
+            }
             handleClickNavigationComments={handleClickNavigationComments}
           />
         )}

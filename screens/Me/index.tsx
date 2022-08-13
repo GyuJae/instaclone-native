@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, TextStyle, View, ViewStyle} from 'react-native';
+import {Text, TextStyle, View, ViewStyle, TouchableOpacity} from 'react-native';
+import {logOutUser} from '../../apollo';
 import {colors} from '../../themes';
 
 const Wrapper: ViewStyle = {
@@ -16,7 +17,9 @@ const Title: TextStyle = {
 export const Me = () => {
   return (
     <View style={Wrapper}>
-      <Text style={Title}>Me</Text>
+      <TouchableOpacity onPress={logOutUser}>
+        <Text style={Title}>Me</Text>
+      </TouchableOpacity>
     </View>
   );
 };
