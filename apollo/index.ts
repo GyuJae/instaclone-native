@@ -23,7 +23,7 @@ export const logOutUser = async () => {
 };
 
 const httpLink = createHttpLink({
-  uri: 'https://four-icons-tan-119-69-166-205.loca.lt/graphql',
+  uri: 'https://fresh-readers-teach-119-69-166-205.loca.lt/graphql',
 });
 
 const authLink = setContext((_, {headers}) => {

@@ -3,6 +3,7 @@ import {Text, TextStyle, View, ViewStyle, TouchableOpacity} from 'react-native';
 import {ISeeFeedPost} from '../../../apollo/queries/seeFeed.query';
 import {colors} from '../../../themes';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useToggleLike} from '../../../apollo/mutations/toggleLike.mutatino';
 
 interface IProps {
   post: ISeeFeedPost;
@@ -48,19 +49,31 @@ export const Extra: React.FC<IProps> = ({
   handleClickNavigationLikes,
   handleClickNavigationComments,
 }) => {
+  const {toggleLikeMutate, error, loading} = useToggleLike(
+    post.id,
+    post.isLiked,
+  );
+  const handlePressToggleLike = () => {
+    toggleLikeMutate();
+  };
+  console.log(error, loading);
   return (
     <View style={Wrapper}>
       <View style={Container}>
-        <View style={Action}>
-          <Icon
-            name={post.isLiked ? 'heart' : 'heart-outline'}
-            color={post.isLiked ? colors.warn : colors.text}
-            size={22}
-          />
-        </View>
-        <View style={Action}>
-          <Icon name={'chatbubble-outline'} color={colors.text} size={22} />
-        </View>
+        <TouchableOpacity onPress={handlePressToggleLike}>
+          <View style={Action}>
+            <Icon
+              name={post.isLiked ? 'heart' : 'heart-outline'}
+              color={post.isLiked ? colors.warn : colors.text}
+              size={22}
+            />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={Action}>
+            <Icon name={'chatbubble-outline'} color={colors.text} size={22} />
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={Container}>
         <TouchableOpacity onPress={handleClickNavigationLikes}>

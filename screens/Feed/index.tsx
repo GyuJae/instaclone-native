@@ -17,7 +17,7 @@ export const Feed = ({navigation}: FeedScreenProps) => {
   };
 
   const handleEndReachedFetchMore = () => {
-    if (loading || !data?.seeFeed.hasNextPage) {
+    if (loading || !data || !data.seeFeed.hasNextPage) {
       return;
     }
     fetchMore({
@@ -49,7 +49,7 @@ export const Feed = ({navigation}: FeedScreenProps) => {
         refreshing={refreshing}
         onRefresh={handleRefresh}
         data={data?.seeFeed.posts}
-        keyExtractor={post => `feed-${post.id}`}
+        keyExtractor={(post, index) => `feed-${post.id}-${index}`}
         renderItem={post => (
           <PostItem
             post={post.item}
