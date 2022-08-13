@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Feed, Me, Notifications, Profile, Search} from '../../../screens';
+import {Feed, Me, Notifications, Search} from '../../../screens';
 import {colors} from '../../../themes';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Image, ImageStyle, View} from 'react-native';
@@ -35,6 +35,7 @@ export const TabNav = () => {
         headerStyle: {
           backgroundColor: colors.background,
         },
+        headerTintColor: colors.text,
         headerTitleAlign: 'center',
       }}>
       <Tab.Screen

@@ -18,3 +18,11 @@ export const USER_FRAGEMENT = gql`
     isMe
   }
 `;
+
+export const USER_ME_FRAGMENT = gql`
+  fragment UserMeFragment on UserEntity {
+    id
+    avatar
+    username
+  }
+`;
