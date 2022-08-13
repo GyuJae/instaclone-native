@@ -1,10 +1,12 @@
 import React from 'react';
 import {Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {useToggleFollow} from '../../../apollo';
 import {colors} from '../../../themes';
 
 interface IProps {
   isFollowing: boolean;
   isMe: boolean;
+  userId: number;
 }
 
 const FollowBtnContainer: ViewStyle = {
@@ -29,7 +31,10 @@ const UnFollowBtnText: TextStyle = {
   color: colors.background,
 };
 
-export const FollowingBtn: React.FC<IProps> = ({isFollowing, isMe}) => {
+export const FollowingBtn: React.FC<IProps> = ({isFollowing, isMe, userId}) => {
+  const {toggleFollowMutate} = useToggleFollow(userId);
+  const handlePressToggleFolloew = () => toggleFollowMutate();
+
   const followBtnPayload = isFollowing ? 'Following' : 'Follow';
   const followBtnContainerStyle = isFollowing
     ? UnFollowBtnContainer
@@ -41,7 +46,7 @@ export const FollowingBtn: React.FC<IProps> = ({isFollowing, isMe}) => {
   }
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={handlePressToggleFolloew}>
       <View style={followBtnContainerStyle}>
         <Text style={followBtnTextStyle}>{followBtnPayload}</Text>
       </View>

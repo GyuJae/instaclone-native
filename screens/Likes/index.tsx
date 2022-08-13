@@ -12,6 +12,7 @@ export const Likes: React.FC<
   route: {
     params: {postId},
   },
+  navigation,
 }) => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const {data, loading, refetch, fetchMore} = useSeePostLikes(postId, 0);
@@ -34,6 +35,9 @@ export const Likes: React.FC<
     });
   };
 
+  const handlePressNavigateProfile = (userId: number, username: string) =>
+    navigation.navigate('profile', {userId, username});
+
   return (
     <ScreenLayout loading={loading}>
       <FlatList
@@ -43,7 +47,14 @@ export const Likes: React.FC<
         onRefresh={handleRefresh}
         data={data?.seePostLikes.users}
         keyExtractor={(item, index) => `Like-User-${item.id}-${index}`}
-        renderItem={({item: user}) => <UserRow user={user} />}
+        renderItem={({item: user}) => (
+          <UserRow
+            user={user}
+            handlePressNavigateProfile={() =>
+              handlePressNavigateProfile(user.id, user.username)
+            }
+          />
+        )}
       />
     </ScreenLayout>
   );

@@ -10,6 +10,7 @@ interface IProps {
   handleClickNavigatePhoto: () => void;
   handleClickNavigationLikes: () => void;
   handleClickNavigationComments: () => void;
+  handleClickNavigationProfile: () => void;
 }
 
 const Wrapper: ViewStyle = {
@@ -48,6 +49,7 @@ export const Extra: React.FC<IProps> = ({
   post,
   handleClickNavigationLikes,
   handleClickNavigationComments,
+  handleClickNavigationProfile,
 }) => {
   const {toggleLikeMutate} = useToggleLike(post.id, post.isLiked);
   const handlePressToggleLike = () => {
@@ -81,7 +83,9 @@ export const Extra: React.FC<IProps> = ({
         </TouchableOpacity>
       </View>
       <View style={Container}>
-        <Text style={Username}>{post.user.username}</Text>
+        <TouchableOpacity onPress={handleClickNavigationProfile}>
+          <Text style={Username}>{post.user.username}</Text>
+        </TouchableOpacity>
         <Text style={Caption}>{post.caption}</Text>
       </View>
     </View>

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   TextStyle,
+  TouchableOpacity,
   useWindowDimensions,
   View,
   ViewStyle,
@@ -18,6 +19,7 @@ interface IProps {
     isFollowing: boolean;
     isMe: boolean;
   };
+  handlePressNavigateProfile: () => void;
 }
 
 const Wrapper: ViewStyle = {
@@ -38,16 +40,23 @@ const Username: TextStyle = {
   fontWeight: '500',
 };
 
-export const UserRow: React.FC<IProps> = ({user}) => {
+export const UserRow: React.FC<IProps> = ({
+  user,
+  handlePressNavigateProfile,
+}) => {
   const {width} = useWindowDimensions();
 
   return (
     <View style={{...Wrapper, width}}>
-      <View style={Container}>
+      <TouchableOpacity style={Container} onPress={handlePressNavigateProfile}>
         <UserAvatar path={user.avatar} />
         <Text style={Username}>{user.username}</Text>
-      </View>
-      <FollowingBtn isFollowing={user.isFollowing} isMe={user.isMe} />
+      </TouchableOpacity>
+      <FollowingBtn
+        isFollowing={user.isFollowing}
+        isMe={user.isMe}
+        userId={user.id}
+      />
     </View>
   );
 };

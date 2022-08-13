@@ -32,8 +32,11 @@ export const Feed = ({navigation}: FeedScreenProps) => {
   const handleClickNavigatePhoto = () =>
     navigation.navigate('stack', {screen: 'photo'});
 
-  const handleClickNavigationProfile = () =>
-    navigation.navigate('stack', {screen: 'profile', params: {userId: 1}});
+  const handleClickNavigationProfile = (userId: number, username: string) =>
+    navigation.navigate('stack', {
+      screen: 'profile',
+      params: {userId, username},
+    });
 
   const handleClickNavigationLikes = (postId: number) =>
     navigation.navigate('stack', {screen: 'likes', params: {postId}});
@@ -50,13 +53,15 @@ export const Feed = ({navigation}: FeedScreenProps) => {
         onRefresh={handleRefresh}
         data={data?.seeFeed.posts}
         keyExtractor={(post, index) => `feed-${post.id}-${index}`}
-        renderItem={post => (
+        renderItem={({item: post}) => (
           <PostItem
-            post={post.item}
-            handleClickNavigationProfile={handleClickNavigationProfile}
+            post={post}
+            handleClickNavigationProfile={() =>
+              handleClickNavigationProfile(post.user.id, post.user.username)
+            }
             handleClickNavigatePhoto={handleClickNavigatePhoto}
             handleClickNavigationLikes={() =>
-              handleClickNavigationLikes(post.item.id)
+              handleClickNavigationLikes(post.id)
             }
             handleClickNavigationComments={handleClickNavigationComments}
           />

@@ -57,7 +57,6 @@ export const cache = new InMemoryCache({
           },
         },
         seePostLikes: {
-          keyArgs: false,
           merge(
             existing = {
               users: [],

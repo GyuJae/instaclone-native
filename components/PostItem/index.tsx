@@ -34,6 +34,7 @@ export const PostItem: React.FC<IProps> = ({
         handleClickNavigatePhoto={handleClickNavigatePhoto}
         handleClickNavigationLikes={handleClickNavigationLikes}
         handleClickNavigationComments={handleClickNavigationComments}
+        handleClickNavigationProfile={handleClickNavigationProfile}
       />
     </View>
   );
