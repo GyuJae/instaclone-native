@@ -15,6 +15,7 @@ import {IsMe} from './IsMe';
 
 interface IProps {
   comment: ISeeCommentsComment;
+  handleRefetch: () => void;
 }
 
 const Wrapper: ViewStyle = {
@@ -38,7 +39,7 @@ const Payload: TextStyle = {
   color: colors.lightGray,
 };
 
-export const Item: React.FC<IProps> = ({comment}) => {
+export const Item: React.FC<IProps> = ({comment, handleRefetch}) => {
   const navigation = useNavigation();
   const {width} = useWindowDimensions();
 
@@ -62,7 +63,11 @@ export const Item: React.FC<IProps> = ({comment}) => {
         <View style={PayloadContainer}>
           <Text style={Payload}>{comment.payload}</Text>
         </View>
-        <IsMe inView={comment.isMine} />
+        <IsMe
+          inView={comment.isMine}
+          commentId={comment.id}
+          handleRefetch={handleRefetch}
+        />
       </View>
     </View>
   );

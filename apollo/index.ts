@@ -87,6 +87,7 @@ export * from './mutations/login.mutation';
 export * from './mutations/toggleFollow.mutation';
 export * from './mutations/toggleLike.mutation';
 export * from './mutations/createComment.mutation';
+export * from './mutations/deleteComment.mutation';
 
 export * from './queries/seePostLikes.query';
 export * from './queries/searchPosts.query';

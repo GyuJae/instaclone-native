@@ -23,7 +23,9 @@ export const List: React.FC<IProps> = ({
       <FlatList
         data={comments}
         keyExtractor={(comment, index) => `comment-${comment.id}-${index}`}
-        renderItem={({item: comment}) => <Item comment={comment} />}
+        renderItem={({item: comment}) => (
+          <Item comment={comment} handleRefetch={handleRefetch} />
+        )}
         refreshing={refreshing}
         onRefresh={handleRefetch}
       />

@@ -1,9 +1,12 @@
 import React from 'react';
 import {Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {useDeleteComment} from '../../../../../apollo';
 import {colors} from '../../../../../themes';
 
 interface IProps {
   inView: boolean;
+  commentId: number;
+  handleRefetch: () => void;
 }
 
 const Container: ViewStyle = {
@@ -17,14 +20,29 @@ const Delete: TextStyle = {
   fontWeight: '900',
 };
 
-export const IsMe: React.FC<IProps> = ({inView}) => {
+export const IsMe: React.FC<IProps> = ({inView, commentId, handleRefetch}) => {
+  const {deleteCommentMutate} = useDeleteComment();
+
+  const handlePressDelete = () => {
+    deleteCommentMutate({
+      variables: {
+        input: {
+          commentId,
+        },
+      },
+      onCompleted: () => {
+        handleRefetch();
+      },
+    });
+  };
+
   if (!inView) {
     return null;
   }
 
   return (
     <View style={Container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handlePressDelete}>
         <Text style={Delete}>Delete</Text>
       </TouchableOpacity>
     </View>
