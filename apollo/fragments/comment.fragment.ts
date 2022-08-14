@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client';
 
-export const COMMENT_FEED_FRAMENT = gql`
-  fragment CommentFeedFragment on CommentEntity {
+export const COMMENT_FRAMENT = gql`
+  fragment CommentFragment on CommentEntity {
     id
     payload
     createdAt

@@ -1,9 +1,5 @@
 import {gql, useQuery} from '@apollo/client';
-import {
-  COMMENT_FEED_FRAMENT,
-  POST_FEED_FRAGMENT,
-  USER_FEED_FRAGMENT,
-} from '../fragments';
+import {POST_FEED_FRAGMENT, USER_FEED_FRAGMENT} from '../fragments';
 
 export const useSeePost = (postId: number) => {
   const {data, loading, refetch, fetchMore, error} = useQuery<
@@ -34,14 +30,10 @@ export const SEE_POST_QUERY = gql`
         user {
           ...UserFeedFragment
         }
-        comments {
-          ...CommentFeedFragment
-        }
       }
     }
   }
   ${POST_FEED_FRAGMENT}
-  ${COMMENT_FEED_FRAMENT}
   ${USER_FEED_FRAGMENT}
 `;
 

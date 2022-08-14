@@ -38,8 +38,8 @@ export const Feed = ({navigation}: FeedScreenProps) => {
   const handleClickNavigationLikes = (postId: number) =>
     navigation.navigate('stack', {screen: 'likes', params: {postId}});
 
-  const handleClickNavigationComments = () =>
-    navigation.navigate('stack', {screen: 'comments'});
+  const handleClickNavigationComments = (postId: number) =>
+    navigation.navigate('stack', {screen: 'comments', params: {postId}});
 
   return (
     <ScreenLayout loading={loading}>
@@ -59,7 +59,9 @@ export const Feed = ({navigation}: FeedScreenProps) => {
             handleClickNavigationLikes={() =>
               handleClickNavigationLikes(post.id)
             }
-            handleClickNavigationComments={handleClickNavigationComments}
+            handleClickNavigationComments={() =>
+              handleClickNavigationComments(post.id)
+            }
           />
         )}
       />

@@ -23,7 +23,7 @@ export const logOutUser = async () => {
 };
 
 const httpLink = createHttpLink({
-  uri: 'https://deep-garlics-raise-119-69-166-205.loca.lt/graphql',
+  uri: 'https://hip-emus-type-119-69-166-205.loca.lt/graphql',
 });
 
 const authLink = setContext((_, {headers}) => {
@@ -86,6 +86,8 @@ export * from './mutations/createAccount.mutation';
 export * from './mutations/login.mutation';
 export * from './mutations/toggleFollow.mutation';
 export * from './mutations/toggleLike.mutation';
+
 export * from './queries/seePostLikes.query';
 export * from './queries/searchPosts.query';
 export * from './queries/seePost.query';
+export * from './queries/seeComments.query';
