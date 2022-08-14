@@ -1,12 +1,9 @@
 import React from 'react';
 import {LazyQueryExecFunction} from '@apollo/client';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
-import {TextInput} from 'react-native';
-import {
-  ISearchPosts,
-  ISearchPostsVariables,
-} from '../../../apollo/queries/searchPosts.query';
-import {InputStyle} from '../../../components';
+import {TextInput, useWindowDimensions} from 'react-native';
+import {ISearchPosts, ISearchPostsVariables} from '../../../apollo';
+import {SearchInputStyle} from '../../../components';
 import {colors} from '../../../themes';
 
 interface IForm {
@@ -22,6 +19,7 @@ interface IProps {
 }
 
 export const Input: React.FC<IProps> = ({searchPostsQueryFn, loading}) => {
+  const {width} = useWindowDimensions();
   const {control, handleSubmit} = useForm<IForm>();
   const onSubmit: SubmitHandler<IForm> = ({keyword}) => {
     if (loading) {
@@ -45,7 +43,7 @@ export const Input: React.FC<IProps> = ({searchPostsQueryFn, loading}) => {
       }}
       render={({field: {onChange, onBlur, value}}) => (
         <TextInput
-          style={InputStyle}
+          style={{...SearchInputStyle, width: width / 1.1}}
           placeholder="Search photos"
           autoCapitalize="none"
           returnKeyLabel="Search"

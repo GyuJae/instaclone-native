@@ -6,7 +6,7 @@ import {colors} from '../../../themes';
 
 export type IStackNavigatorParamList = {
   profile: {userId: number; username: string};
-  photo: undefined;
+  photo: {postId: number};
   likes: {postId: number};
   comments: undefined;
 };

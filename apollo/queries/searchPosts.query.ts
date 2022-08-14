@@ -4,7 +4,7 @@ export const useSearchPosts = () => {
   const [
     searchPostsQueryFn,
     {data, loading, refetch, fetchMore, error, called},
-  ] = useLazyQuery<ISearchPosts, ISearchPostsVariables>(SEE_POST_LIKES_QUERY);
+  ] = useLazyQuery<ISearchPosts, ISearchPostsVariables>(SEE_SEARCH_POSTS_QUERY);
 
   return {
     data,
@@ -17,7 +17,7 @@ export const useSearchPosts = () => {
   };
 };
 
-export const SEE_POST_LIKES_QUERY = gql`
+export const SEE_SEARCH_POSTS_QUERY = gql`
   query SearchPosts($input: ISearchPostsInput!) {
     searchPosts(input: $input) {
       ok

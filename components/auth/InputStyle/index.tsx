@@ -8,3 +8,8 @@ export const InputStyle: TextStyle = {
   marginBottom: spacing.tiny,
   color: colors.text,
 };
+
+export const SearchInputStyle: TextStyle = {
+  ...InputStyle,
+  marginVertical: 5,
+};
