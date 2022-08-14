@@ -1,7 +1,7 @@
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {ISeeCommentsComment} from '../../../apollo';
-import {colors} from '../../../themes';
+import {Item} from './Item';
 
 interface IProps {
   comments?: ISeeCommentsComment[];
@@ -23,9 +23,7 @@ export const List: React.FC<IProps> = ({
       <FlatList
         data={comments}
         keyExtractor={(comment, index) => `comment-${comment.id}-${index}`}
-        renderItem={({item: comment}) => (
-          <Text style={{color: colors.text}}>{comment.payload}</Text>
-        )}
+        renderItem={({item: comment}) => <Item comment={comment} />}
         refreshing={refreshing}
         onRefresh={handleRefetch}
       />
