@@ -14,7 +14,7 @@ export const List: React.FC<IProps> = ({
   handleRefetch,
   refreshing,
 }) => {
-  if (!comments) {
+  if (!comments || comments.length === 0) {
     return null;
   }
 

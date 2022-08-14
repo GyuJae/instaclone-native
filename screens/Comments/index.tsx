@@ -7,6 +7,7 @@ import {IStackNavigatorParamList} from '../../navigators/LoggedInNav/Stack';
 import {colors} from '../../themes';
 import {Input} from './Input';
 import {List} from './List';
+import {NotFound} from './NotFound';
 
 const Wrapper: ViewStyle = {
   flex: 1,
@@ -37,6 +38,7 @@ export const Comments: React.FC<
           comments={comments}
           handleRefetch={handleRefetch}
         />
+        <NotFound inView={!!(comments && comments.length === 0)} />
       </ScreenLayout>
       <Input postId={postId} handleRefetch={handleRefetch} />
     </View>
