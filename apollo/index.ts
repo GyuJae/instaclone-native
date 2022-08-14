@@ -88,3 +88,4 @@ export * from './mutations/toggleFollow.mutation';
 export * from './mutations/toggleLike.mutation';
 export * from './queries/seePostLikes.query';
 export * from './queries/searchPosts.query';
+export * from './queries/seePost.query';

@@ -19,8 +19,9 @@ export const FileItem: React.FC<IProps> = ({
   width,
   handleNavigationPost,
 }) => {
+  const handlePressNavigate = () => handleNavigationPost(post.id);
   return (
-    <TouchableOpacity onPress={() => handleNavigationPost(post.id)}>
+    <TouchableOpacity onPress={handlePressNavigate}>
       <Image
         source={{uri: post.files[0].posterPath}}
         style={{...FileStyle, width: width / numColumns}}

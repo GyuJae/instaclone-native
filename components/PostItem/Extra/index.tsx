@@ -7,7 +7,6 @@ import {useToggleLike} from '../../../apollo';
 
 interface IProps {
   post: ISeeFeedPost;
-  handleClickNavigatePhoto: () => void;
   handleClickNavigationLikes: () => void;
   handleClickNavigationComments: () => void;
   handleClickNavigationProfile: () => void;

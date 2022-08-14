@@ -8,7 +8,6 @@ import {Header} from './Header';
 interface IProps {
   post: ISeeFeedPost;
   handleClickNavigationProfile: () => void;
-  handleClickNavigatePhoto: () => void;
   handleClickNavigationLikes: () => void;
   handleClickNavigationComments: () => void;
 }
@@ -18,7 +17,6 @@ const Container: ViewStyle = {};
 export const PostItem: React.FC<IProps> = ({
   post,
   handleClickNavigationProfile,
-  handleClickNavigatePhoto,
   handleClickNavigationLikes,
   handleClickNavigationComments,
 }) => {
@@ -31,7 +29,6 @@ export const PostItem: React.FC<IProps> = ({
       <Files files={post.files} />
       <Extra
         post={post}
-        handleClickNavigatePhoto={handleClickNavigatePhoto}
         handleClickNavigationLikes={handleClickNavigationLikes}
         handleClickNavigationComments={handleClickNavigationComments}
         handleClickNavigationProfile={handleClickNavigationProfile}

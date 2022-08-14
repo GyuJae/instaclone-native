@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {Image, useWindowDimensions} from 'react-native';
+import {Image, useWindowDimensions, View} from 'react-native';
 import Swiper from 'react-native-swiper';
 
 interface IProps {
@@ -26,8 +26,10 @@ export const Files: React.FC<IProps> = ({files}) => {
     ));
   }, [files, height, width]);
   return (
-    <Swiper showsButtons autoplay loop width={width} height={height - 400}>
-      {fileList}
-    </Swiper>
+    <View style={{height: height - 400}}>
+      <Swiper showsButtons autoplay loop width={width} height={height - 400}>
+        {fileList}
+      </Swiper>
+    </View>
   );
 };

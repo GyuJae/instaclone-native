@@ -29,9 +29,6 @@ export const Feed = ({navigation}: FeedScreenProps) => {
     });
   };
 
-  const handleClickNavigatePhoto = () =>
-    navigation.navigate('stack', {screen: 'photo'});
-
   const handleClickNavigationProfile = (userId: number, username: string) =>
     navigation.navigate('stack', {
       screen: 'profile',
@@ -59,7 +56,6 @@ export const Feed = ({navigation}: FeedScreenProps) => {
             handleClickNavigationProfile={() =>
               handleClickNavigationProfile(post.user.id, post.user.username)
             }
-            handleClickNavigatePhoto={handleClickNavigatePhoto}
             handleClickNavigationLikes={() =>
               handleClickNavigationLikes(post.id)
             }

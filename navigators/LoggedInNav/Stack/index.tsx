@@ -8,7 +8,7 @@ export type IStackNavigatorParamList = {
   profile: {userId: number; username: string};
   photo: {postId: number};
   likes: {postId: number};
-  comments: undefined;
+  comments: {postId: number};
 };
 
 const Stack = createStackNavigator<IStackNavigatorParamList>();
@@ -26,7 +26,13 @@ export const StackNav = () => {
         },
       }}>
       <Stack.Screen name="profile" component={Profile} />
-      <Stack.Screen name="photo" component={Photo} />
+      <Stack.Screen
+        name="photo"
+        component={Photo}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="likes" component={Likes} />
       <Stack.Screen name="comments" component={Comments} />
     </Stack.Navigator>
