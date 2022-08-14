@@ -14,6 +14,8 @@ export const useSeeComments = (postId: number, offset?: number) => {
     },
   });
 
+  console.log(data);
+
   return {
     comments: data?.seeComments.comments,
     loading,
