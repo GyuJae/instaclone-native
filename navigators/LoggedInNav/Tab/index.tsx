@@ -79,6 +79,14 @@ export const TabNav = () => {
             />
           ),
         }}
+        listeners={({navigation}) => {
+          return {
+            tabPress: e => {
+              e.preventDefault();
+              navigation.navigate('upload');
+            },
+          };
+        }}
       />
       <Tab.Screen
         name="notifications"
